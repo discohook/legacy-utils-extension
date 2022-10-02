@@ -1,10 +1,29 @@
 html {
-    max-width: 350px;
     font-family: 'Whitney', sans-serif;
     background-color: #36393f;
-    color: #fff;
+    color: rgb(220, 221, 222);
+    margin: 0;
+}
+
+body {
+    margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6, p {
     margin: 0;
+}
+
+.header {
+    background-color: #202225;
+    padding: 10px 15px;
+    color: #eee;
+}
+
+a.link {
+    color: rgb(0, 176, 244);
+    text-decoration: none;
+}
+
+a.link:hover {
+    text-decoration: underline;
 }
