@@ -1,0 +1,83 @@
+const entityCache = {
+  user: { _prefix: '@' },
+  member: { _prefix: '@' },
+  role: { _prefix: '@' },
+  channel: { _prefix: '#' },
+  webhook: { _prefix: '@' },
+}
+
+const invalidEntityCache = {
+  user: [],
+  member: [],
+  role: [],
+  channel: [],
+  webhook: [],
+}
+
+const getCurrentGuildIds = () => {
+}
+
+const getMentions = () => {
+  const mapElements = e => {return { element: e, type: e.dataset.mentionType, id: e.dataset.mentionId }}
+  return {
+    users: [...document.querySelectorAll('span[data-mention-type="user"]')].map(mapElements),
+    roles: [...document.querySelectorAll('span[data-mention-type="role"]')].map(mapElements),
+    channels: [...document.querySelectorAll('span[data-mention-type="channel"]')].map(mapElements),
+  }
+}
+
+const replaceMention = async (mention) => {
+  if (invalidEntityCache[mention.type].includes(mention.id)) {
+    mention.element.innerText = `${entityCache[mention.type]._prefix}invalid-${mention.type}`
+    return
+  }
+  let cached = entityCache[mention.type][mention.id]
+  if (!cached) {
+    // TODO: fetch
+    let route = ''
+    switch (mention.type) {
+      case 'user':
+        route = `/users/${mention.id}`
+        break
+      //case 'role':
+      //  route = `/roles/${mention.id}`
+      //  break
+      //case 'channel':
+      //  route = `/channels/${mention.id}`
+      //  break
+      default:
+        break
+    }
+    if (route && SNOWFLAKE_RE.test(mention.id)) {
+      console.log(`[Discohook Utils] Attempting to resolve ${mention.type} with ID ${mention.id}`)
+      const response = await fetch(DUTILS_API + route)
+      const data = await response.json()
+      if (!response.ok) {
+        invalidEntityCache[mention.type].push(mention.id)
+        mention.element.innerText = `${entityCache[mention.type]._prefix}invalid-${mention.type}`
+        console.error(data)
+        return
+      }
+      entityCache[mention.type][mention.id] = data
+      cached = data
+    } else {
+      console.debug(`[Discohook Utils] Skipping ${mention.type} with ID ${mention.id}; unrecognized type or invalid snowflake`)
+      mention.element.innerText = `${entityCache[mention.type]._prefix}${mention.type}`
+      return
+    }
+  }
+  mention.element.innerText = `${entityCache[mention.type]._prefix}${cached.name}`
+}
+
+const replaceAllMentions = () => {
+  const mentions = getMentions()
+  Object.keys(mentions).forEach(t => mentions[t].forEach(m => replaceMention(m)))
+}
+
+document.addEventListener('input', (e) => {
+  if (e.target.type === 'text' || e.target.tagName === 'TEXTAREA') {
+    replaceAllMentions()
+  }
+})
+
+console.log('[Discohook Utils] Loaded mentions')
