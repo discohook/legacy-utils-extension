@@ -21,13 +21,18 @@
     "content_scripts": [{
         "matches": [
             "https://discohook.org/",
+            "https://discohook.org/?data=*",
             "https://discohook.org/viewer",
+            "https://discohook.org/viewer?data=*",
             "https://discohook.app/",
-            "https://discohook.app/viewer"
+            "https://discohook.app/?data=*",
+            "https://discohook.app/viewer",
+            "https://discohook.app/viewer?data=*"
         ],
         "js": [
             "browser-polyfill.min.js",
             "constants.js",
+            "override-default.js",
             "mentions.js"
         ]
     }],
