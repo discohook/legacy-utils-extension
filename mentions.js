@@ -59,9 +59,9 @@ const replaceMention = async (mention) => {
       case 'role':
         route = `/roles/${mention.id}`
         break
-      //case 'channel':
-      //  route = `/channels/${mention.id}`
-      //  break
+      case 'channel':
+        route = `/channels/${mention.id}`
+        break
       default:
         break
     }
