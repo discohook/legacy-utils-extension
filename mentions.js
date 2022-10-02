@@ -105,6 +105,7 @@ document.addEventListener('input', (e) => {
   }
 })
 
-document.addEventListener('load', replaceAllMentions)
+// Try to ensure mentions are always loaded even without user intervention
+setInterval(replaceAllMentions, 2000)
 
 console.log('[Discohook Utils] Loaded mentions')
