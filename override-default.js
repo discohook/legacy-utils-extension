@@ -15,7 +15,7 @@ const overrideData = {
   embeds: [
     {
       title: 'You have the Discohook Utils extension installed!',
-      description: 'If you\'re seeing this after loading into the default Discohook page, that means you installed the Discohook Utils browser extension successfully. Great job!\n\nBe sure to check out [the feature list](https://github.com/shayypy/discohook-utils-extension/blob/main/README.md#features) to see what all this extension can do for you.',
+      description: 'If you\'re seeing this after loading into the default Discohook page, that means you installed the Discohook Utils browser extension successfully. Great job!\n\nBe sure to check out [the feature list](https://github.com/shayypy/discohook-utils-extension/blob/main/README.md#features) to see what all this extension can do for you.\n\n:warning: Chances are you\'ll need the Discohook Utils bot in your server! You can [invite it here](https://dutils.shay.cat/invite) if you haven\'t already.',
       color: 16744959,
       author: {
         name: 'Discohook Utils',
