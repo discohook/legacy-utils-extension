@@ -85,6 +85,7 @@ const replaceMention = async (mention) => {
       return
     }
   }
+
   mention.element.innerText = `${entityCache[mention.type]._prefix}${cached.name}`
   if (cached.color) {
     mention.element.style.color = toRGBA(cached.color)
