@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Discohook Utils",
     "description": "Third-party tools for Discohook.",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "action": {
         "default_popup": "popout/index.html",
         "default_icon": {
@@ -23,11 +23,7 @@
             "https://discohook.org/",
             "https://discohook.org/?data=*",
             "https://discohook.org/viewer",
-            "https://discohook.org/viewer?data=*",
-            "https://discohook.app/",
-            "https://discohook.app/?data=*",
-            "https://discohook.app/viewer",
-            "https://discohook.app/viewer?data=*"
+            "https://discohook.org/viewer?data=*"
         ],
         "js": [
             "browser-polyfill.min.js",
@@ -37,7 +33,11 @@
         ]
     }],
     "host_permissions": [
-        "https://discohook.org/*",
-        "https://discohook.app/*"
-    ]
+        "https://discohook.org/*"
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{c82b3366-9548-4a3f-b694-b1231916c15e}"
+        }
+    }
 }

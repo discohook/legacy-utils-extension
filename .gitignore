@@ -2,3 +2,4 @@ build.bat
 develop-chromium.bat
 develop-firefox.bat
 web-ext-artifacts/
+.DS_Store
